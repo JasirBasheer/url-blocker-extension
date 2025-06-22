@@ -11,6 +11,7 @@ document.getElementById('addUrl').addEventListener('click', () => {
     alert('Please enter a URL pattern.');
     return;
   }
+  
   if (!isValidUrlPattern(url)) {
     alert('Invalid URL pattern. Use format like *://*.example.com/*');
     return;
