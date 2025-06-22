@@ -1,10 +1,8 @@
-// Load blocked URLs when the options page is opened
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Options page loaded');
   loadUrls();
 });
 
-// Add URL button click handler
 document.getElementById('addUrl').addEventListener('click', () => {
   console.log('Add URL button clicked');
   const urlInput = document.getElementById('urlInput');
@@ -32,7 +30,6 @@ document.getElementById('addUrl').addEventListener('click', () => {
   });
 });
 
-// Load and display blocked URLs
 function loadUrls() {
   chrome.storage.sync.get(['blockedUrls'], (result) => {
     console.log('Loading URLs:', result.blockedUrls);
@@ -50,7 +47,7 @@ function loadUrls() {
       `;
       urlList.appendChild(li);
     });
-    // Add event listeners for edit and delete buttons
+
     document.querySelectorAll('.edit-btn').forEach(button => {
       button.addEventListener('click', () => {
         const index = parseInt(button.getAttribute('data-index'));
@@ -68,7 +65,7 @@ function loadUrls() {
   });
 }
 
-// Edit a URL
+
 function editUrl(index) {
   chrome.storage.sync.get(['blockedUrls'], (result) => {
     const blockedUrls = result.blockedUrls || [];
@@ -94,7 +91,6 @@ function editUrl(index) {
   });
 }
 
-// Delete a URL
 function deleteUrl(index) {
   chrome.storage.sync.get(['blockedUrls'], (result) => {
     const blockedUrls = result.blockedUrls || [];
@@ -106,9 +102,7 @@ function deleteUrl(index) {
   });
 }
 
-// Validate URL pattern
 function isValidUrlPattern(url) {
-  // Stricter validation for Chrome match patterns
   const pattern = /^(\*|\w+):\/\/(\*|\w+\.)*[\w-]+(:\d+)?\/(\*|\w+)$/;
   const isValid = pattern.test(url);
   console.log('Validating URL:', url, 'Result:', isValid);
